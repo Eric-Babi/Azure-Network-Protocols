@@ -113,13 +113,16 @@ Step 4: Use NSG to Deny ICMP Traffic for DC-1 in Azure Portal and Observe Traffi
   
 </p>
 <br />
-
-<p>
-<img src="https://imgur.com/Bf1IhYe.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://imgur.com/15ct7pU.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Step 6: SSH into VM2 from VM1 via PowerShell. Type "SSH" into WireShark's filter bar (reference step 3) --> Go to "PowerShell" again, type "ssh labuser@(VM1 private IP address)" into the cmd line *view screenshot above for help --> Type "yes" to connection prompt --> enter password on next cmd line (password will not show but enter it anyway and press enter key, it will register) --> You have now successfully remotely logged into VM2's command-line Interface (CLI). It should now read "labuser@VM2:". You can type a linux cmd such as: "id" to see the new network traffic between the VMs since linking via SSH. When finished exploring, type "exit" into cmd line on PowerShell to end the connection. 
+Step 5: SSH into DC-1 from Client-1 via PowerShell
+  <p>
+  - Re-start capture on wireshark to clear previous filters
+    <p>
+  - Type "SSH" into WireShark's filter bar
+      <p>
+  - Go to "PowerShell" and type "ssh labuser@(DC-1 private IP address)
+  - Type "yes" to connection prompt --> enter password on next cmd line (password will not show but enter it anyway and press enter key, it will register) --> You have now successfully remotely logged into VM2's command-line Interface (CLI). It should now read "labuser@VM2:". You can type a linux cmd such as: "id" to see the new network traffic between the VMs since linking via SSH. When finished exploring, type "exit" into cmd line on PowerShell to end the connection. 
 </p>
 <br />
 
