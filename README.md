@@ -75,17 +75,42 @@ Step 3: Remote Desktop into Client-1
 <p>
 </p>
 <p></p>
-
-Step 4: Go to VM2 on Azure Portal --> "overview" --> copy the "private IP address" --> Go to VM1 --> Search "PowerShell" in the start menu search bar & open it --> Type "ping -t" then paste VM2's private IP address into "PowerShell" to start a "perpetual ping" (WireShark will now show the two VMs pinging back and forth, allow the ping to continue). Pay attention to all of the data being communicated between both VMs on this step
-</p>
-<br />
-
-<p>
-<img src="https://imgur.com/5xWsHFk.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://imgur.com/AgVXdZo.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Step 5: Go back to Azure Portal --> type "Network Security Group" in the search bar (this is the VMs firewall) --> select "VM2-NSG" --> "Inbound security rules" under settings --> click "+ add" --> in the new pop up window change "protocol" to "ICMP" --> change "action" to "deny" --> change "Name" to "Deny_ICMP_Ping" --> Click "add" at bottom. *Notice how the ping cmd in PowerShell on VM1 done on step#4 is immediately halted due to being blocked by VM2's firewall thanks to the new inbound security rule you made. If you edit the rule to allow traffic, notice how the perpetual ping cmds successfully resume. *Press Ctrl+C to stop PowerShell ping
+Step 4: Use NSG to Deny ICMP Traffic for DC-1 in Azure Portal and Observe Traffic Behaviour in wireshark
+  <p>
+    - NSG is an equivalent of firewall. 
+    <p>
+    - Select "DC-1-NSG"
+      </p>
+    - "Inbound security rules" 
+        </p>
+    - Under settings click "+ add"
+        </p>
+    - In the new pop up window change "protocol" to "ICMP"
+        </p>
+    - Change "action" to "deny" 
+        </p>
+    - Change "Name" to "Deny_ICMP_Ping"
+        </p>
+    - Click "add" at bottom. 
+        </p>
+    - *Notice how the ping in command line (cmd) on Client-1 done on step#3 is immediately halted due to being blocked by DC-1's firewall thanks to the new inbound security rule made. 
+        </p>
+    - If you edit the rule to allow traffic, notice how the perpetual ping cmds successfully resume. 
+        </p>
+    - *Press Ctrl+C to stop PowerShell ping
+      <p>
+      </p>
+<img src="https://imgur.com/5y1gdyo.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<p>
+    - no response on wireshark
+  <p>
+    <img src="https://imgur.com/eO1BTWk.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+    <p>
+    - request times out on command prompt
+    <img src="https://imgur.com/E2O5PtC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+  
 </p>
 <br />
 
