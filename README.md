@@ -117,6 +117,9 @@ Step 4: Use NSG to Deny ICMP Traffic for DC-1 in Azure Portal and Observe Traffi
 <p>
 Step 5: SSH into DC-1 from Client-1 via PowerShell
   <p>
+    <p> 
+      - Note* the vm I tried to control using SSH was running on windows and ssh requests were timing out. SSH works with linux. Please take note. I had to start the whole lab again and set my DC-1 on Ubuntu. 
+    </p>
   - Re-start capture on wireshark to clear previous filters
     <p>
   - Type "SSH" into WireShark's filter bar
