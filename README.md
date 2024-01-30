@@ -1,5 +1,8 @@
 
-<h1>Network Security Groups (NSGs) and Inspecting Traffic Between Azure Virtual Machines</h1>
+<p align="center">
+<img src="https://i.imgur.com/Ua7udoS.png" alt="Traffic Examination"/>
+</p>
+<h1>Network Security Groups (NSGs) and Analysing Traffic Between Azure Virtual Machines</h1>
 In this tutorial, we observe various network traffic to and from Azure Virtual Machines with Wireshark as well as experiment with Network Security Groups.<br />
 
 <h2>Environments and Technologies Used</h2>
@@ -14,7 +17,7 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 <h2>Operating Systems Used </h2>
 
 - Windows 10 (21H2)
-- Windows Server 2022
+- Ubuntu Server 20.04
 
 <h2>High-Level Steps</h2>
 
@@ -59,7 +62,7 @@ Step 3: Remote Desktop into Client-1
              <p>
   - Filter out irrelevant network traffic via display filter bar (type "icmp" in filter bar to only see ping traffic). 
                <p>
-      - traffic can also be filtered using port numbers. for example ssh = 22
+      - traffic can also be filtered using port numbers using the following syntax: tcp.port==22
                </p>
 </p>
 <br />
@@ -118,21 +121,35 @@ Step 4: Use NSG to Deny ICMP Traffic for DC-1 in Azure Portal and Observe Traffi
 Step 5: SSH into DC-1 from Client-1 via PowerShell
   <p>
     <p> 
-      - Note* the vm I tried to control using SSH was running on windows and ssh requests were timing out. SSH works with linux. Please take note. I had to start the whole lab again and set my DC-1 on Ubuntu. 
+      - Note* the VM (DC-1) I tried to control using SSH was running on windows and ssh requests were timing out. SSH works with linux. Please take note. I had to start the whole lab again and set my DC-1 on Ubuntu. 
     </p>
   - Re-start capture on wireshark to clear previous filters
     <p>
   - Type "SSH" into WireShark's filter bar
       <p>
   - Go to "PowerShell" and type "ssh labuser@(DC-1 private IP address)
-  - Type "yes" to connection prompt --> enter password on next cmd line (password will not show but enter it anyway and press enter key, it will register) --> You have now successfully remotely logged into VM2's command-line Interface (CLI). It should now read "labuser@VM2:". You can type a linux cmd such as: "id" to see the new network traffic between the VMs since linking via SSH. When finished exploring, type "exit" into cmd line on PowerShell to end the connection. 
+        <p>
+        </p>
+  - Type "yes" to connection prompt
+       <p>
+  - Enter password on next cmd line (password will not show but enter it anyway and press enter key, it will register)
+              <p>
+  - You have now successfully remotely logged into VM2's command-line Interface (CLI). It should now read "labuser@VM2:"
+                     <p>
+  - You can type a linux cmd such as: "id", "pwd" to see the new network traffic between the VMs. 
+                            <p>
+  - Filter DHCP traffic
+                              </p>
+  - When done exploring, type "exit" into cmd line on PowerShell to end the connection. You can always log in back by enteri ng the password for DC-1. 
+        <p>
+ ** - SSH Traffic**
+          <p>
+    <img src="https://imgur.com/LTyQMND.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
-<br />
-
-<p>
-<img src="https://imgur.com/UdMf24u.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
+  - **DHCP traffic**
+</p>
+ <img src="https://imgur.com/ljJW62h.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <p>
-Step 7: Next you will observe DHCP traffic the same as you did with SSH. Type "DHCP" into WireShark's filter bar (reference step 3) --> Go to "PowerShell" again, type "ipconfig /renew" into the cmd line to request a new IP address for VM1 from the Azure DHCP server (you may lose connection to the VM, if so, just RDH back into it) --> You should see the newly issued IP address in WireShark. That concludes this lab.
 </p>
 <br />
